@@ -45,6 +45,9 @@ class Ex_1_1_29 {
     
     class func rank(_ key: Int, _ a: [Int]) -> Int {
         var index = indexOf(key, a)
+        if index == -1 {
+            return 0
+        }
         while a[index] >= key {
             index -= 1
             if index < 0 {
