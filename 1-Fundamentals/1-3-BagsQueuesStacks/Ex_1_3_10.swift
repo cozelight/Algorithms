@@ -1,25 +1,26 @@
 //
-//  Ex_1_3_09.swift
+//  Ex_1_3_10.swift
 //  Fundamental
 //
-//  Created by coze on 2018/10/22.
+//  Created by coze on 2018/10/26.
 //  Copyright © 2018 cozelight. All rights reserved.
 //
 
 import Foundation
 
 /*
- 1 + 2 ) * 3 - 4 ) * 5 - 6 ) ) )
- ( ( 1 + 2 ) * ( ( 3 - 4 ) * ( 5 - 6 ) ) )
+ ( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )
+ 1 2 3 + 4 5 * * +
  
- sqrt 1 + 2 ) )
  ( sqrt ( 1 + 2 ) )
+ 1 2 + sqrt
  **/
-class Ex_1_3_09 {
+class InfixToPostfix {
     class func unitTest(_ args: String...) {
         guard args.count >= 1 else {
             return;
         }
+        
         let text = args[0]
         let textArray = text.split(separator: " ")
         
@@ -27,22 +28,21 @@ class Ex_1_3_09 {
         let ops = Stack<String>.init()
         
         for item in textArray {
-        
+            
             switch item {
                 
             case "+", "-", "*", "/", "sqrt":
                 ops.push(String(item))
-                
+
             case ")":
-                let op = ops.pop() ?? ""
-                var v = vals.pop() ?? ""
+                let op = ops.pop()!
+                var v = vals.pop()!
                 
                 switch op {
                 case "+", "-", "*", "/":
-                    let v2 = vals.pop() ?? ""
-                    v = "( " + v2 + " " + op + " " + v + " )"
+                    v = vals.pop()! + " " + v + " " + op
                 case "sqrt":
-                    v = "( " + op + " " + v + " )"
+                    v = v + " " + op
                 default:
                     break
                 }
