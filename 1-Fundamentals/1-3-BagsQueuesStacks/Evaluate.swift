@@ -1,49 +1,55 @@
 //
-//  Ex_1_3_09.swift
+//  Evaluate.swift
 //  Fundamental
 //
-//  Created by coze on 2018/10/22.
+//  Created by coze on 2018/10/26.
 //  Copyright © 2018 cozelight. All rights reserved.
 //
 
 import Foundation
 
 /*
- 1 + 2 ) * 3 - 4 ) * 5 - 6 ) ) )
- ( ( 1 + 2 ) * ( ( 3 - 4 ) * ( 5 - 6 ) ) )
- 
- sqrt 1 + 2 ) )
- ( sqrt ( 1 + 2 ) )
+ *  ( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )
+ *  101.0
+ *
+ *  ( ( 1 + sqrt ( 5 ) ) / 2.0 )
+ *  1.618033988749895
  **/
-class Ex_1_3_09 {
+class Evaluate {
     @discardableResult
-    class func unitTest(_ args: String...) -> String? {
+    class func unitTest(_ args: String...) -> Double? {
         guard args.count >= 1 else {
             return nil;
         }
+        
         let text = args[0]
         let textArray = text.split(separator: " ")
         
-        let vals = Stack<String>.init()
+        let vals = Stack<Double>.init()
         let ops = Stack<String>.init()
         
         for item in textArray {
-        
+            
             switch item {
                 
             case "+", "-", "*", "/", "sqrt":
                 ops.push(String(item))
                 
             case ")":
-                let op = ops.pop() ?? ""
-                var v = vals.pop() ?? ""
+                let op = ops.pop()!
+                var v = vals.pop()!
                 
                 switch op {
-                case "+", "-", "*", "/":
-                    let v2 = vals.pop() ?? ""
-                    v = "( " + v2 + " " + op + " " + v + " )"
+                case "+":
+                    v = vals.pop()! + v
+                case "-":
+                    v = vals.pop()! - v
+                case "*":
+                    v = vals.pop()! * v
+                case "/":
+                    v = vals.pop()! / v
                 case "sqrt":
-                    v = "( " + op + " " + v + " )"
+                    v = sqrt(v)
                 default:
                     break
                 }
@@ -54,8 +60,9 @@ class Ex_1_3_09 {
                 break
                 
             default:
-                vals.push(String(item))
+                vals.push(Double(item) ?? 0.0)
             }
+            
         }
         
         print(vals.peek()!)

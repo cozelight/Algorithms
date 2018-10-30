@@ -16,9 +16,10 @@ import Foundation
  1 2 + sqrt
  **/
 class InfixToPostfix {
-    class func unitTest(_ args: String...) {
+    @discardableResult
+    class func unitTest(_ args: String...) -> String? {
         guard args.count >= 1 else {
-            return;
+            return nil;
         }
         
         let text = args[0]
@@ -58,5 +59,7 @@ class InfixToPostfix {
         }
         
         print(vals.peek()!)
+        
+        return vals.peek()
     }
 }
