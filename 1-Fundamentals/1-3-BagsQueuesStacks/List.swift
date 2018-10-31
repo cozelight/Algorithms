@@ -89,6 +89,19 @@ extension List: Sequence {
             return item
         }
     }
+    
+    subscript(index: Int) -> Node<T>? {
+        guard index >= 0, index < count else {
+            return nil
+        }
+        var curr = first
+        var i = 0
+        while i < index {
+            i += 1
+            curr = curr?.next
+        }
+        return curr
+    }
 }
 
 // MARK: Unit test
