@@ -6,7 +6,7 @@
 //  Copyright © 2018 cozelight. All rights reserved.
 //
 
-class Queue<T> {
+class Queue<T: Equatable> {
     
     private var first: Node<T>?
     private var last: Node<T>?

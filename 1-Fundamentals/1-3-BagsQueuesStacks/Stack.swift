@@ -6,7 +6,7 @@
 //  Copyright © 2018 cozelight. All rights reserved.
 //
 
-class Stack<T> {
+class Stack<T: Equatable> {
     
     private var first: Node<T>?
     var count = 0

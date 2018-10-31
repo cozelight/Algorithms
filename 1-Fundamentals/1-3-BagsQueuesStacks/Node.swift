@@ -6,7 +6,7 @@
 //  Copyright © 2018 cozelight. All rights reserved.
 //
 
-class Node<T> {
+class Node<T: Equatable> {
     var item: T?
     var next: Node?
     

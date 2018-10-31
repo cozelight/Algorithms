@@ -8,10 +8,10 @@
 
 import Foundation
 
-class List<T> {
+class List<T: Equatable> {
     
-    private var first: Node<T>?
-    private var last: Node<T>?
+    var first: Node<T>?
+    var last: Node<T>?
     var count = 0
     
     var isEmpty: Bool {
@@ -91,31 +91,6 @@ extension List: Sequence {
     }
 }
 
-// MARK: Exercise 1.3.19
-extension List {
-    func removeLast() -> T? {
-        guard !isEmpty, let node = last else {
-            return nil
-        }
-        if first === last {
-            return removeFirst()
-        }
-        let item = node.item
-        
-        var prev: Node<T>?
-        var curr = first
-        while curr?.next != nil {
-            prev = curr
-            curr = curr?.next
-        }
-        prev?.next = nil
-        last = prev
-        count -= 1
-        
-        return item
-    }
-}
-
 // MARK: Unit test
 extension List {
     class func testBaseMethods() {
@@ -132,18 +107,8 @@ extension List {
         }
         List<Int>.showList(lst)
         
-        print("removeFirst: \(String(describing: lst.removeFirst()!))")
+        print("removeFirst: \(String(describing: lst.removeFirst()))")
         List<Int>.showList(lst)
-    }
-    
-    class func testRemoveLast() {
-        let lst = List<Int>.init(array: [6, 8, 10, 12])
-        List<Int>.showList(lst)
-        
-        while !lst.isEmpty {
-            print("removeLast: \(String(describing: lst.removeLast()!))")
-            List<Int>.showList(lst)
-        }
     }
 }
 
@@ -156,7 +121,7 @@ extension List {
         print("👇")
         var str: String
         if !list.isEmpty {
-            str =  "Size: \(list.count), First: \(String(describing: list.firstItem()!)), Last: \(String(describing: list.lastItem()!))"
+            str =  "Size: \(list.count), First: \(String(describing: list.firstItem()!)), Last: \(String(describing: list.lastItem()))"
         } else {
             str =  "Size: \(list.count)"
         }
@@ -169,12 +134,5 @@ extension List {
             r.append(Int(arc4random_uniform(UInt32(b)) + UInt32(a)))
         }
         return List<Int>.init(array: r)
-    }
-    
-    class func unitTest() {
-        testBaseMethods()
-        print("")
-        testRemoveLast()
-        print("")
     }
 }
