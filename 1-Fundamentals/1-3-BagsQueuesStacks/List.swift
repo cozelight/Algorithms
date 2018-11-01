@@ -134,7 +134,7 @@ extension List {
         print("👇")
         var str: String
         if !list.isEmpty {
-            str =  "Size: \(list.count), First: \(String(describing: list.firstItem()!)), Last: \(String(describing: list.lastItem()))"
+            str =  "Size: \(list.count), First: \(String(describing: list.firstItem())), Last: \(String(describing: list.lastItem()))"
         } else {
             str =  "Size: \(list.count)"
         }

@@ -9,6 +9,7 @@
 import Foundation
 
 extension List {
+    @discardableResult
     func delete(k: Int) -> T? {
         guard k > 0 else {
             return nil
