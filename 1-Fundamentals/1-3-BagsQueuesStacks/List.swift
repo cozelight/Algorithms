@@ -138,7 +138,7 @@ extension List {
         } else {
             str =  "Size: \(list.count)"
         }
-        print(str)
+        print(str + "\n")
     }
     
     class func randomList(n: Int, a: Int, b: Int) -> List<Int> {
@@ -147,5 +147,11 @@ extension List {
             r.append(Int(arc4random_uniform(UInt32(b)) + UInt32(a)))
         }
         return List<Int>.init(array: r)
+    }
+    
+    func createNode(item: T) -> Node<T> {
+        let node = Node<T>.init()
+        node.item = item
+        return node
     }
 }
